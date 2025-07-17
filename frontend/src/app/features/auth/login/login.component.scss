@@ -1,0 +1,231 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/spacing" as *;
+@use "../../../../styles/typography" as *;
+@use "../../../../styles/effects" as *;
+@use "../../../../styles/radius" as *;
+@use "../../../../styles/stroke" as *;
+@use "sass:map";
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: map.get($spacing, 6);
+  background-color: map.get($primary-colors, 1000);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: map.get($spacing, 8);
+
+  img {
+    width: 100%;
+    max-width: 100%;
+
+    @media screen and (max-width: 768px) {
+      max-width: 80%;
+    }
+
+    @media screen and (max-width: 480px) {
+      max-width: 60%;
+    }
+  }
+}
+
+.login-card {
+  background-color: map.get($primary-colors, 900);
+  border-radius: map.get($radius, 6);
+  width: 100%;
+  max-width: 448px;
+  padding: map.get($spacing, 8);
+}
+
+.login-title {
+  color: map.get($neutral-colors, 100);
+  font-size: map.get(map.get($headings, h4), font-size);
+  font-weight: $font-weight-regular;
+  margin-bottom: map.get($spacing, 8);
+  user-select: none;
+}
+
+.full-width {
+  width: 100%;
+
+  &.email-username {
+    margin-bottom: map.get($spacing, 6);
+  }
+}
+
+/* Button styles with hover effect */
+.login-button {
+  width: 100%;
+  padding: map.get($spacing, 3) 0;
+  border-radius: map.get($radius, 3);
+  font-size: map.get(map.get($body, b1), font-size);
+  font-weight: $font-weight-regular;
+  margin-block: map.get($spacing, 8);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  /* Normal state */
+  &.mat-mdc-raised-button:not(:disabled) {
+    background-color: map.get($red-colors, 100);
+    color: map.get($neutral-colors, 100);
+  }
+
+  /* Hover state */
+  &:hover {
+    background-color: map.get($neutral-colors, 100) !important;
+    color: map.get($secondary-colors, 200) !important;
+  }
+}
+
+.signup-text {
+  color: map.get($neutral-colors, 100);
+  font-size: map.get(map.get($body, b1), font-size);
+  text-align: center;
+  user-select: none;
+  width: 100%;
+}
+
+.signup-link {
+  color: map.get($red-colors, 100);
+  text-decoration: underline;
+  margin-left: map.get($spacing, 1);
+  transition: color 0.2s ease;
+}
+
+/* Angular Material overrides */
+::ng-deep {
+  /* Form field styles */
+  .mat-mdc-text-field-wrapper {
+    background-color: transparent !important;
+    color: map.get($neutral-colors, 400) !important;
+  }
+
+  .mat-mdc-form-field.mat-form-field-invalid {
+    .mdc-text-field--outlined {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: map.get($red-colors, 100) !important;
+      }
+
+      /* Focused state keeps red border */
+      &.mdc-text-field--focused {
+        .mdc-notched-outline__leading,
+        .mdc-notched-outline__notch,
+        .mdc-notched-outline__trailing {
+          border-color: map.get($red-colors, 100) !important;
+        }
+      }
+
+      /* Keep original label color */
+      .mdc-floating-label {
+        color: map.get($neutral-colors, 400) !important;
+      }
+    }
+  }
+
+  .error-message-container {
+    margin-bottom: map.get($spacing, 2);
+    color: map.get($red-colors, 100) !important;
+    font-size: map.get(map.get($body, b2), font-size) !important;
+    white-space: nowrap !important;
+    text-align: left !important;
+    display: block;
+    width: 100%;
+    white-space: normal;
+    text-wrap: wrap;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 5px !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .mat-mdc-form-field-required-marker {
+    display: none !important;
+  }
+
+  /* Button label color */
+  .login-button .mdc-button__label {
+    color: inherit !important;
+  }
+
+  .login-button.mat-mdc-raised-button:active {
+    background-color: map.get($secondary-colors, 400) !important;
+    color: map.get($neutral-colors, 100);
+  }
+
+  .login-button.mat-mdc-raised-button:disabled {
+    background-color: rgba(252, 71, 71, 0.102) !important;
+    color: map.get($secondary-colors, 100) !important;
+    cursor: pointer !important;
+  }
+}
+
+/* Angular Material form field overrides */
+::ng-deep {
+  /* Form field container */
+  .mat-mdc-form-field {
+    width: 100%;
+
+    /* Input field styles */
+    .mat-mdc-text-field-wrapper {
+      background-color: transparent !important;
+      padding: 0 !important;
+    }
+
+    /* Label alignment */
+    .mat-mdc-floating-label {
+      color: map.get($neutral-colors, 100) !important;
+      font-size: map.get(map.get($headings, h6), font-size) !important;
+      transform-origin: left !important;
+      left: 0 !important;
+      width: 100% !important;
+      text-align: left !important;
+    }
+
+    /* Placeholder alignment */
+    .mdc-text-field__input::placeholder {
+      color: map.get($neutral-colors, 400) !important;
+      opacity: 1 !important;
+      font-size: map.get(map.get($headings, h6), font-size) !important;
+      text-align: left !important;
+    }
+
+    /* Input text alignment */
+    .mdc-text-field__input {
+      color: map.get($neutral-colors, 100) !important;
+      text-align: left !important;
+      padding-left: 0 !important;
+      cursor: pointer !important;
+    }
+
+    /* Focused label position */
+    .mdc-text-field--focused .mat-mdc-floating-label {
+      transform: translateX(8px) translateY(-28px) !important;
+      font-size: map.get(map.get($body, b2), font-size) !important;
+      color: map.get($neutral-colors, 400) !important;
+      left: 0 !important;
+    }
+
+    /* Non-empty label position */
+    .mdc-text-field--label-floating .mat-mdc-floating-label {
+      left: 0 !important;
+    }
+
+    /* Remove the gap between label and input */
+    .mdc-text-field--outlined .mdc-notched-outline__notch {
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+}
